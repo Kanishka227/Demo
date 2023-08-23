@@ -1,0 +1,45 @@
+package com.HotelService.services;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.HotelService.entities.Hotel;
+import com.HotelService.exceptions.ResourceNotFound;
+import com.HotelService.repositories.HotelRepository;
+
+@Service
+public class HotelSerImp implements HotelService{
+	
+	@Autowired
+	HotelRepository hotelRepo;
+
+	@Override
+	
+	public Hotel create(Hotel h) {
+		Hotel hotel = hotelRepo.save(h);
+		return hotel;
+	}
+
+	@Override
+	public Hotel getHotelById(String id) {
+		
+		return hotelRepo.findById(id).orElseThrow(()-> new ResourceNotFound());
+	}
+
+	
+	@Override
+	public List<Hotel> getAllHotels() {
+		List<Hotel> list = hotelRepo.findAll();
+		return list;
+	}
+
+	@Override
+	public void deleteById(String id) {
+		hotelRepo.deleteById(id);
+		
+	}
+
+}

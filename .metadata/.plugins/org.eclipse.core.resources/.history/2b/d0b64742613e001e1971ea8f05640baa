@@ -1,0 +1,5 @@
+package com.HotelService.repositories;
+
+public interface RatingRepository {
+
+}
